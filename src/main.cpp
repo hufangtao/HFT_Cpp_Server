@@ -3,6 +3,6 @@
 int main() {
     Box b;
     b.getSize();
-    std::cout<<"Hello World!"<<std::endl;
+    std::cout<<"Hello Makefile!"<<std::endl;
     return 0;
 }
