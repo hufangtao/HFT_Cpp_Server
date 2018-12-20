@@ -1,18 +1,41 @@
-SHELL := /bin/bash
 CC := g++
-OBJECTS = main.o
+CC += -g
 
-HFT_Server : $(OBJECTS)
-	cc -o HFT_Server $(OBJECTS)
+ROOT_DIR	= $(shell pwd)
+SRC_DIR		= $(ROOT_DIR)
+SRC_FILES_CPP	:= $(shell find $(SRC_DIR) -name '*.cpp')
+SRC_FILES_C	:= $(shell find $(SRC_DIR) -name '*.c')
+SRC_FILES_CC	:= $(shell find $(SRC_DIR) -name '*.cc')
+OBJ_FILES	:= $(SRC_FILES_CPP:.cpp=.o)
+OBJ_FILES	+= $(SRC_FILES_C:.c=.o)
+OBJ_FILES	+= $(SRC_FILES_CC:.cc=.o)
 
-$(OBJECTS):
+INC_DIR		=  -I/usr/include -I/usr/local/include
+INC_DIR		+= -I./
 
-help:
-	@echo "帮助："
-	@echo " make data "
-	@echo $(OBJECTS)
-	@echo "		DATATYPE=type - 表示仅仅生成指定类型的数据 "
-	@echo ""
-.PHONY : clean
+CFLAGS		:= -lpthread -Wwrite-strings -w # -fPIC
+
+LIB_NAME	:= rpc_client
+LIB_SUFFIX	:= .a
+LIB_TARGET	:= lib$(LIB_NAME)$(LIB_SUFFIX)
+
+TARGET		:= HFT_Server
+
+.PHONY		: all clean
+
+all: $(TARGET);
+
+$(TARGET): $(OBJ_FILES)
+	$(CC) -o $@ $(OBJ_FILES)
+	@echo **********Build*********
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) $(INC_DIR) -c $< -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) $(INC_DIR) -c $< -o $@
+%.o: %.cc
+	$(CC) $(CFLAGS) $(INC_DIR) -c $< -o $@
+
 clean:
-	-rm HFT_Server $(OBJECTS)
+	rm -f $(TARGET) $(OBJ_FILES)
+
