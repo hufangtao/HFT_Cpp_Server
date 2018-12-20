@@ -1,7 +1,6 @@
 SHELL := /bin/bash
 CC := g++
-SRC_PATH := src/
-OBJECTS = main.cpp
+OBJECTS = main.o
 help:
 	@echo "帮助："
 	@echo " make data "
