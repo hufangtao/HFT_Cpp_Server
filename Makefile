@@ -13,7 +13,8 @@ OBJ_FILES	+= $(SRC_FILES_CC:.cc=.o)
 INC_DIR		=  -I/usr/include -I/usr/local/include
 INC_DIR		+= -I./
 
-CFLAGS		:= -lpthread -Wwrite-strings -w # -fPIC
+CFLAGS		:= -std=c++11
+CFLAGS      += -lpthread -lboost_system
 
 LIB_NAME	:= rpc_client
 LIB_SUFFIX	:= .a
