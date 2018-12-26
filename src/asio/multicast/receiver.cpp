@@ -1,6 +1,5 @@
 #include <boost/asio.hpp>
 #include <iostream>
-#include "asio/multicast/receiver.cpp"
 constexpr short multicast_port = 30001;
 class receiver
 {
@@ -11,7 +10,7 @@ class receiver
     void do_receive()
     {
         socket_.async_receive_from(
-            boost::asio::buffer(data_), sender_endpoint_, [this](boost::system::error_code &ec, std::size_t length) {
+            boost::asio::buffer(data_), sender_endpoint_, [this](boost::system::error_code ec, std::size_t length) {
                 if (!ec)
                 {
                     /* code */
@@ -34,5 +33,4 @@ class receiver
         socket_.set_option(boost::asio::ip::multicast::join_group(multicast_address));
         do_receive();
     }
-    ~receiver();
 };
