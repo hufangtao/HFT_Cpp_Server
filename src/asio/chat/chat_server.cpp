@@ -48,21 +48,58 @@ void chat_session::deliver(const chat_message &msg)
 void chat_session::do_read_header()
 {
     auto self(shared_from_this());
-    boost::asio::async_read(socket_,
-                            boost::asio::buffer(read_msg_.data(), chat_message::HEADER_LENGTH),
-                            [this, self](boost::system::error_code ec, std::size_t length) {
-                                if (!ec && read_msg_.decode_header())
-                                {
-                                    do_read_body();
-                                }
-                                else
-                                {
-                                    room_.leave(shared_from_this());
-                                }
-                            });
+    boost::asio::async_read(
+        socket_,
+        boost::asio::buffer(read_msg_.data(), chat_message::HEADER_LENGTH),
+        [this, self](boost::system::error_code ec, std::size_t length) {
+            if (!ec && read_msg_.decode_header())
+            {
+                do_read_body();
+            }
+            else
+            {
+                room_.leave(shared_from_this());
+            }
+        });
 }
-void chat_session::do_read_body(){}
-void chat_session::do_write(){}
+void chat_session::do_read_body()
+{
+    auto self(shared_from_this());
+    boost::asio::async_read(
+        socket_,
+        boost::asio::buffer(read_msg_.body(), read_msg_.body_length()),
+        [this, self](boost::system::error_code ec, std::size_t length) {
+            if (!ec)
+            {
+                room_.deliver(read_msg_);
+                do_read_header();
+            }
+            else
+            {
+                room_.leave(shared_from_this());
+            }
+        });
+}
+void chat_session::do_write()
+{
+    auto self(shared_from_this());
+    boost::asio::async_write(
+        socket_, boost::asio::buffer(write_msgs_.front().data(), write_msgs_.front().length()),
+        [this, self](boost::system::error_code ec, std::size_t length) {
+            if (!ec)
+            {
+                write_msgs_.pop_front();
+                if (!write_msgs_.empty)
+                {
+                    do_write();
+                }
+            }
+            else
+            {
+                room_.leave(shared_from_this());
+            }
+        });
+}
 
 chat_server::chat_server(boost::asio::io_context &io_context,
                          const tcp::endpoint &endpoint) : acceptor_(io_context)
@@ -72,11 +109,12 @@ chat_server::chat_server(boost::asio::io_context &io_context,
 
 void chat_server::do_accept()
 {
-    acceptor_.async_accept([this](boost::system::error_code ec, tcp::socket socket) {
-        if (!ec)
-        {
-            std::make_shared<chat_session>(std::move(socket), room_)->start();
-        }
-        do_accept();
-    })
+    acceptor_.async_accept(
+        [this](boost::system::error_code ec, tcp::socket socket) {
+            if (!ec)
+            {
+                std::make_shared<chat_session>(std::move(socket), room_)->start();
+            }
+            do_accept();
+        });
 }
