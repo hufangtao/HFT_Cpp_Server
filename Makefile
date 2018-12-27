@@ -32,6 +32,10 @@ $(TARGET): $(OBJ_FILES)
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) $(INC_DIR) -c $< -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) $(INC_DIR) -c $< -o $@
+%.o: %.cc
+	$(CC) $(CFLAGS) $(INC_DIR) -c $< -o $@
 
 clean:
 	rm -f $(TARGET) $(OBJ_FILES)
