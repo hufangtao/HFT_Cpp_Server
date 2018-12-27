@@ -3,6 +3,7 @@
 
 #include <boost/asio.hpp>
 #include <queue>
+#include <iostream>
 #include "common/chat/chat_message.h"
 using boost::asio::ip::tcp;
 
