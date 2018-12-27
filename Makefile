@@ -27,7 +27,7 @@ TARGET		:= HFT_Server
 all: $(TARGET);
 
 $(TARGET): $(OBJ_FILES)
-	$(CC) -o $@ $(OBJ_FILES)
+	$(CC) -o $@ $(OBJ_FILES) $(CFLAGS)
 	@echo **********Build*********
 
 %.o: %.cpp
