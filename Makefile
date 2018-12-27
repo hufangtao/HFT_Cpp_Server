@@ -14,7 +14,7 @@ INC_DIR		=  -I/usr/include -I/usr/local/include
 INC_DIR		+= -I./
 
 CFLAGS		:= -std=c++11
-CFLAGS      += -lpthread -lboost_system
+CFLAGS      += -lpthread -lboost_filesystem -lboost_thread -lboost_system
 
 LIB_NAME	:= rpc_client
 LIB_SUFFIX	:= .a
