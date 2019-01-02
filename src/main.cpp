@@ -1,6 +1,5 @@
 #include <iostream>
-#include "asio/chat/chat_server.h"
-#include <time.h>
+#include "gateway/gateway_tcp_server.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,12 +10,14 @@ int main(int argc, char *argv[])
             std::cerr << "Usage:chat_server <port>[<port> ...]\n";
             return 1;
         }
+
+        // 加载一些配置文件
+
         boost::asio::io_context io_context;
-        std::list<chat_server> servers;
+        gateway_tcp_server tcp_server;
         for (int i = 1; i < argc; ++i)
         {
-            tcp::endpoint endpoint(tcp::v4(), std::atoi(argv[i]));
-            servers.emplace_back(io_context, endpoint);
+            tcp_server.listen_tcp_port(io_context, std::atoi(argv[i]));
         }
         io_context.run();
     }
