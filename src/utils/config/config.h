@@ -5,6 +5,8 @@
 #include <string>
 #include <map>
 
+#include "utils/common.h"
+
 static const std::string CONFIG_FILE[] = {
     "../../../etc/config/server.conf"};
 /**
