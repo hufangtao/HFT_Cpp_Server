@@ -1,26 +1,23 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#include <iostream>
+#include <string>
+#include <map>
+
+static const std::string CONFIG_FILE[] = {
+    "../../../etc/config/server.conf"};
 /**
  * 负责加载配置文件
- * 其他模块访问配置
+ * 供其他模块访问配置
 */
 class config
 {
 private:
-    /* data */
+    std::map<std::string, std::string> config_map;
+
 public:
-    config(/* args */);
+    config();
     ~config();
 };
-
-config::config(/* args */)
-{
-}
-
-config::~config()
-{
-}
-
-
 #endif
