@@ -1,4 +1,5 @@
 #include "chat_room.h"
+#include "chat_session.h"
 
 void chat_room::join(chat_participant_ptr participant)
 {
@@ -11,6 +12,7 @@ void chat_room::join(chat_participant_ptr participant)
 
 void chat_room::leave(chat_participant_ptr participant)
 {
+    std::cout<<"a client leave\n";
     participants_.erase(participant);
 }
 

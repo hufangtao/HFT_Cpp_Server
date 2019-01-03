@@ -1,6 +1,6 @@
 #ifndef CHAT_ROOM_H
 #define CHAT_ROOM_H
-
+#include <iostream>
 #include <deque>  // chat_msg_queue
 #include <memory> // shared_ptr
 #include <set>    // participants

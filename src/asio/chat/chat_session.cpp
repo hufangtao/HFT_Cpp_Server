@@ -1,6 +1,7 @@
 #include "chat_session.h"
 
-chat_session::chat_session(tcp::socket socket, chat_room &room) : socket_(std::move(socket)), room_(room)
+chat_session::chat_session(tcp::socket socket, chat_room &room)
+    : socket_(std::move(socket)), room_(room)
 {
 }
 void chat_session::start()
@@ -20,6 +21,7 @@ void chat_session::deliver(const chat_message &msg)
 
 void chat_session::do_read_header()
 {
+    std::cout<<"do reading header\n";
     auto self(shared_from_this());
     boost::asio::async_read(
         socket_,
@@ -31,12 +33,14 @@ void chat_session::do_read_header()
             }
             else
             {
+                std::cout<<ec.message()<<std::endl;
                 room_.leave(shared_from_this());
             }
         });
 }
 void chat_session::do_read_body()
 {
+    std::cout<<"do reading body\n";
     auto self(shared_from_this());
     boost::asio::async_read(
         socket_,
@@ -44,11 +48,14 @@ void chat_session::do_read_body()
         [this, self](boost::system::error_code ec, std::size_t length) {
             if (!ec)
             {
+                std::cout<<"length: "<<length<<"  body_length"<<read_msg_.body_length()<<"\n";
+                std::cout.write(read_msg_.body(), read_msg_.body_length());
                 room_.deliver(read_msg_);
                 do_read_header();
             }
             else
             {
+                std::cout<<ec.message()<<std::endl;
                 room_.leave(shared_from_this());
             }
         });
@@ -62,7 +69,7 @@ void chat_session::do_write()
             if (!ec)
             {
                 write_msgs_.pop_front();
-                if (!write_msgs_.empty)
+                if (!write_msgs_.empty())
                 {
                     do_write();
                 }

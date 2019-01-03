@@ -20,6 +20,7 @@ class chat_message
     ~chat_message();
 
     const char *data() const;
+    char *data();
     std::size_t length() const;
     const char *body() const;
     char *body();

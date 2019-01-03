@@ -12,6 +12,11 @@ const char *chat_message::data() const
 {
     return data_;
 }
+
+char *chat_message::data()
+{
+    return data_;
+}
 std::size_t chat_message::length() const
 {
     return HEADER_LENGTH + body_length_;
