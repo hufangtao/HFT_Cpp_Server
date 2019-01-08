@@ -8,8 +8,10 @@ log::~log()
 {
 }
 
-void log::msg(logType type, std::string msg)
+void log::msg(logType type, const std::string date, const std::string time, const std::string file, const std::string line, const std::string func, ...)
 {
+    std::stringstream ss;
+    
 }
 
 /**
