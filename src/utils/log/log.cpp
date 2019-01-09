@@ -10,22 +10,9 @@ log::~log()
 }
 std::list<std::string> log::logList;
 
-void log::msg(logType type, std::string msg)
+void log::addMsg(std::string msg)
 {
-    // std::stringstream msgstream;
-    // fun(msgstream, __VA_ARGS__);
-    // std::string msg = "";
-    // msgstream >> msg;
-
-    std::string log = "";
-    std::string logType = getLogType(type);
-    log += logType;
-    std::string time = getTime();
-    log += time;
-    log += ": ";
-    log += msg;
-    logList.push_back(log);
-
+    logList.push_back(msg);
     writeLog();
 }
 
@@ -40,6 +27,8 @@ void log::writeLog()
         logList.pop_front();
         getStream() << msg;
     }
+    std::stringstream ss;
+    
 }
 
 /**

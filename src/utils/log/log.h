@@ -10,44 +10,6 @@
  * 记录log
 */
 
-template <typename T>
-void msgString(std::stringstream &msgstream, const T &t)
-{
-    msgstream << t << '\n';
-}
-
-template <typename T, typename... Args>
-void msgString(std::stringstream &msgstream, const T &t, Args... args)
-{
-    msgstream << t;
-    msgString(msgstream, args...);
-}
-
-#define LOG(...)                                               \
-    {                                                          \
-        fprintf(stderr, "%s: Line %d:\t", __FILE__, __LINE__); \
-        fprintf(stderr, __VA_ARGS__);                          \
-        fprintf(stderr, "\n");                                 \
-    }
-
-#define DEBUG(...)                               \
-    {                                            \
-        std::stringstream __MSG_SSTREAM__;       \
-        msgString(__MSG_SSTREAM__, __VA_ARGS__); \
-        std::string __MSG__TEMP__;               \
-        __MSG_SSTREAM__ >> __MSG__TEMP__;        \
-        log::msg(log::DEBUG_MSG, __MSG__TEMP__); \
-    }
-
-#define INFO(...) \
-    log::         \
-        msg(log::INFO_MSG, __VA_ARGS__)
-#define WARN(...) \
-    log::         \
-        msg(log::WARN_MSG, __VA_ARGS__)
-#define ERROR(...) \
-    log::          \
-        msg(log::ERROR_MSG, __VA_ARGS__)
 class log
 {
   private:
@@ -67,10 +29,34 @@ class log
     ~log();
 
     static void writeLog();
-
-    static std::ostream &getStream();
     static std::string getTime();
     static std::string getLogType(logType type);
-    static void msg(logType type, std::string msg);
+    static void addMsg(std::string msg);
+    static std::ostream &getStream();
 };
+
+void printLog(std::stringstream &ss){
+    std::string logMsg = "";
+    ss>>logMsg;
+    log::addMsg(logMsg);
+}
+
+template <class T, class ...Args>
+void printLog(std::stringstream &ss, T head, Args... rest){
+    ss<<head;
+    printLog(ss, rest...);
+}
+
+template <class... T>
+void LOG(std::string type,std::string date, std::string time, std::string file, std::string func, int line, T... args)
+{
+    std::stringstream ss;
+    ss<<"["<<type<<"]"<<date<<time<<file<<func<<line;
+    printLog(ss, args...);
+}
+#define DEBUG(MSG...) LOG("DEBUG",__DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
+#define INFO(MSG...) LOG("INFO",__DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
+#define WARN(MSG...) LOG("WARN",__DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
+#define ERROR(MSG...) LOG("ERROR",__DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
+
 #endif
