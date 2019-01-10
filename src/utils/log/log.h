@@ -35,24 +35,27 @@ class log
     static std::ostream &getStream();
 };
 
-void printLog(std::stringstream &ss){
-    std::string logMsg = "";
-    ss>>logMsg;
-    log::addMsg(logMsg);
+std::string printLog(){
+    return "";
 }
 
 template <class T, class ...Args>
-void printLog(std::stringstream &ss, T head, Args... rest){
+std::string printLog(T head, Args... rest){
+    std::stringstream ss;
+    std::string temp;
     ss<<head;
-    printLog(ss, rest...);
+    ss>>temp;
+    return temp + printLog(rest...);
 }
 
 template <class... T>
 void LOG(std::string type,std::string date, std::string time, std::string file, std::string func, int line, T... args)
 {
     std::stringstream ss;
+    std::string logMsg = "";
     ss<<"["<<type<<"]"<<date<<time<<file<<func<<line;
-    printLog(ss, args...);
+    ss>>logMsg;
+    logMsg += printLog(args...);
 }
 #define DEBUG(MSG...) LOG("DEBUG",__DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
 #define INFO(MSG...) LOG("INFO",__DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
