@@ -48,7 +48,7 @@ std::string printLog(T head, Args... rest){
     return temp + printLog(rest...);
 }
 
-template <class... T>
+template <class ...T>
 void LOG(std::string type,std::string date, std::string time, std::string file, std::string func, int line, T... args)
 {
     std::stringstream ss;

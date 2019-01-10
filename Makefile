@@ -1,4 +1,4 @@
-CC := g++
+CC := gcc
 CC += -g
 
 ROOT_DIR	= $(shell pwd)
