@@ -35,7 +35,6 @@ class log
     static std::ostream &getStream();
 };
 
-template <class T>
 std::string printLog(){
     return "";
 }
@@ -57,7 +56,7 @@ void LOG(std::string type,std::string date, std::string time, std::string file, 
     ss<<"["<<type<<"]"<<date<<time<<file<<func<<line;
     ss>>logMsg;
     logMsg += printLog(args...);
-    log::writeLog(logMsg);
+    log::addMsg(logMsg);
 }
 
 #define DEBUG(MSG...) LOG("DEBUG",__DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)

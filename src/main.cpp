@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     try
     {
         // 加载一些配置文件
-        DEBUG("ianamsg");
+        DEBUG("ian a msg",23);
         // boost::asio::io_context io_context;
         // gateway_tcp_server tcp_server;
         // for (int i = 1; i < argc; ++i)
