@@ -34,13 +34,13 @@ class log
     static void addMsg(std::string msg);
     static std::ostream &getStream();
 };
-#endif
 
+template <class T>
 std::string printLog(){
     return "";
 }
 
-template <class T, class ...Args>
+template <class T, class... Args>
 std::string printLog(T head, Args... rest){
     std::stringstream ss;
     std::string temp;
@@ -59,7 +59,10 @@ void LOG(std::string type,std::string date, std::string time, std::string file, 
     logMsg += printLog(args...);
     log::writeLog(logMsg);
 }
-#define DEBUG(MSG...) LOG("DEBUG", __DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
-#define INFO(MSG...) LOG("INFO", __DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
-#define WARN(MSG...) LOG("WARN", __DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
-#define ERROR(MSG...) LOG("ERROR", __DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
+
+#define DEBUG(MSG...) LOG("DEBUG",__DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
+#define INFO(MSG...) LOG("INFO",__DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
+#define WARN(MSG...) LOG("WARN",__DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
+#define ERROR(MSG...) LOG("ERROR",__DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
+
+#endif
