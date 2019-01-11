@@ -35,11 +35,12 @@ class log
     static std::ostream &getStream();
 };
 
+template <class T>
 std::string printLog(){
     return "";
 }
 
-template <class T, class ...Args>
+template <class T, class... Args>
 std::string printLog(T head, Args... rest){
     std::stringstream ss;
     std::string temp;
@@ -48,7 +49,7 @@ std::string printLog(T head, Args... rest){
     return temp + printLog(rest...);
 }
 
-template <class ...T>
+template <class... T>
 void LOG(std::string type,std::string date, std::string time, std::string file, std::string func, int line, T... args)
 {
     std::stringstream ss;

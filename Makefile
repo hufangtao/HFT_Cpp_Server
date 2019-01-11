@@ -1,4 +1,4 @@
-CC := gcc
+CC := g++
 CC += -g
 
 ROOT_DIR	= $(shell pwd)
@@ -13,8 +13,8 @@ OBJ_FILES	+= $(SRC_FILES_CC:.cc=.o)
 INC_DIR		=  -I/usr/include -I/usr/local/include
 INC_DIR		+= -I./ -I./src
 
-CFLAGS		:= -std=c++11
-CFLAGS      += -lpthread -lboost_filesystem -lboost_thread -lboost_system
+CFLAGS		:= -std=c++11 -pthread
+CFLAGS      	+= -lboost_filesystem -lboost_thread -lboost_system
 
 LIB_NAME	:= rpc_client
 LIB_SUFFIX	:= .a
