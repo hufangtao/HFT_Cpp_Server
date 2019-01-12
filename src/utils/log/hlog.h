@@ -1,3 +1,5 @@
+#ifndef HLOG_H
+#define HLOG_H
 #include "log.h"
 
 
@@ -40,3 +42,5 @@ void LOG(std::string type,std::string date, std::string time, std::string file, 
 #define INFO(MSG...) LOG("INFO",__DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
 #define WARN(MSG...) LOG("WARN",__DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
 #define ERROR(MSG...) LOG("ERROR",__DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, ##MSG)
+
+#endif
