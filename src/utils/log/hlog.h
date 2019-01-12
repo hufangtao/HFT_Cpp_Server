@@ -1,5 +1,17 @@
 #include "log.h"
 
+
+void printtt()
+{
+}
+
+template <class T, class... Args>
+void printtt(T head, Args... args)
+{
+    std::cout<<head<<std::endl;
+    printt(args...);
+}
+
 std::string printLog(){
     return "";
 }
