@@ -16,6 +16,8 @@ INC_DIR		+= -I./ -I./src
 CFLAGS		:= -std=c++11 -pthread
 CFLAGS      	+= -lboost_filesystem -lboost_thread -lboost_system
 
+
+
 LIB_NAME	:= rpc_client
 LIB_SUFFIX	:= .a
 LIB_TARGET	:= lib$(LIB_NAME)$(LIB_SUFFIX)
@@ -27,7 +29,7 @@ TARGET		:= HFT_Server
 all: $(TARGET);
 
 $(TARGET): $(OBJ_FILES)
-	$(CC) -o $@ $(OBJ_FILES) $(CFLAGS)
+	$(CC) $(CFLAGS) -o $@ $(OBJ_FILES)
 	@echo **********Build*********
 
 %.o: %.cpp
