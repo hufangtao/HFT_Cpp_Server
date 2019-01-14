@@ -9,6 +9,9 @@ OBJ_FILES	:= $(SRC_FILES_CPP:.cpp=.o)
 OBJ_FILES	+= $(SRC_FILES_C:.c=.o)
 OBJ_FILES	+= $(SRC_FILES_CC:.cc=.o)
 
+PROTO_DIR	= $(ROOT_DIR)/src/protobuf
+PROTO_DEST	= $(ROOT_DIR)/src/common/proto
+
 INC_DIR		=  -I/usr/include -I/usr/local/include
 INC_DIR		+= -I./ -I./src
 
@@ -40,4 +43,7 @@ $(TARGET): $(OBJ_FILES)
 
 clean:
 	rm -f $(TARGET) $(OBJ_FILES)
+
+proto:
+	protoc -I=$(PROTO_DIR) --cpp_out=$(PROTO_DEST) $(PROTO_DIR)/*.proto
 
