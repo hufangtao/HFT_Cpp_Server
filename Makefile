@@ -46,12 +46,12 @@ $(TARGET): $(OBJ_FILES)
 clean:
 	rm -f $(TARGET) $(OBJ_FILES)
 
-proto:
+proto1:
 	for file in $(PROTO_FILE)
 	do
 		protoc -I=$(PROTO_DIR) --cpp_out=$(PROTO_DEST) $(file)
 	done
 
-proto1: 
+proto: 
 	protoc -I=$(PROTO_DIR) --cpp_out=$(PROTO_DEST) $(PROTO_FILE)
 
