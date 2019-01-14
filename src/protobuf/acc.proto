@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package player;
+option optimize_for = LITE_RUNTIME;
+// 账号信息相关
+message login_c2s
+{
+    string platform = 1;                // 平台名字
+    string game_account_id = 2;         // 游戏的账号Id
+    string game_account_sign = 3;       // 游戏的账号Id的签名
+    string channel_open_id = 4;         // 渠道的用户Id
+    string channel_param = 5;           // 渠道其他参数
+}
+
+message login_s2c
+{
+    int32 code = 1;                 // 错误码
+    int32 id = 2;                   // 角色id
+    string channel_open_id = 3;     // 运营平台的用户id
+    string game_account_id = 4;     // 游戏的账号Id
+    string game_account_sign = 5;   // 游戏的账号Id的签名
+    string game_login_key = 6;      // 登录key 用于重新登录时发送
+}
