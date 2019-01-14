@@ -1,0 +1,10 @@
+syntax = "proto3";
+package PlatPmd;
+import "type.proto";
+
+enum PlatCommand
+{
+    PlatCommand_NullPnd     = 0;    // 基础模块（网络包结构、心跳等协议）
+    PlatCommand_AccPmd      = 1;    // 账号信息模块
+    PlatCommand_PlayerPmd   = 2;    // 玩家模块
+}

@@ -1,0 +1,30 @@
+syntax = "proto3";
+package PlatPmd;
+import "type.proto";
+
+message NullPmd
+{
+    enum Param
+    {
+        NetPackageNullPmd_C2S       = 1;
+        NetTickNullPmd_S2C          = 2;
+    }
+}
+
+message NetPackageNullPmd_C2S 
+{
+    int32 byCmd       = 1;
+    int32 byParam     = 2;
+    int32 seq         = 3;    // 发送序列号,断线重连用 
+    int64 fid         = 4;    // server used for forward
+    bytes data        = 5;    // data
+    int64 prototype   = 6;    // 0:proto,1:json,2:http
+    int32 bitmask     = 7;    // FrameHeader位枚举
+    int32 time        = 8;    // client use
+}
+
+message NetTickNullPmd_SC
+{
+    int32 requesttime = 1; // 对方的请求时间原封返回
+    int32 mytime      = 2; // 当前应答的本地时间,秒,必须填,用来防止加速
+}
