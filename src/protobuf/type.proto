@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package types;
+// option optimize_for = LITE_RUNTIME;
+
+// 玩家信息
+message p_player
+{
+    int32 id = 1;
+    string name = 2;
+    int32 sex = 3;
+    string head_img = 4;
+}

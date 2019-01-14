@@ -1,7 +1,9 @@
 syntax = "proto3";
+package section;
+// option optimize_for = LITE_RUNTIME;
 
-package player;
-option optimize_for = LITE_RUNTIME;
+import "type.proto";
+
 // 账号信息相关
 message login_c2s
 {
