@@ -10,13 +10,13 @@
 class gateway_tcp_server
 {
   private:
-    std::list<gateway_tcp_acceptor> acceptors;
+    static std::list<gateway_tcp_acceptor> acceptors;
 
   public:
     gateway_tcp_server();
     ~gateway_tcp_server();
 
-    void listen_tcp_port(boost::asio::io_context &io_context, int port);
+    static void listen_tcp_port(boost::asio::io_context &io_context, int port);
 };
 
 #endif

@@ -11,7 +11,7 @@ class gateway_tcp_acceptor
 {
 public:
   gateway_tcp_acceptor(boost::asio::io_context &io_context,
-              const tcp::endpoint &endpoint);
+                       const tcp::endpoint &endpoint);
 
 private:
   void do_accept();
