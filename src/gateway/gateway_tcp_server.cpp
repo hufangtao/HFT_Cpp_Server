@@ -1,5 +1,7 @@
 #include "gateway_tcp_server.h"
 
+gateway_tcp_server::std::list<gateway_tcp_acceptor> acceptors;
+
 gateway_tcp_server::gateway_tcp_server()
 {
 }
