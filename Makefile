@@ -1,4 +1,5 @@
 CC := g++
+CC += -g
 
 ROOT_DIR	= $(shell pwd)
 SRC_DIR		= $(ROOT_DIR)
@@ -12,7 +13,7 @@ OBJ_FILES	+= $(SRC_FILES_CC:.cc=.o)
 INC_DIR		=  -I/usr/include -I/usr/local/include
 INC_DIR		+= -I./ -I./src
 
-CFLAGS		:=  -pthread
+CFLAGS		:=  -pthread -std=c++11
 
 TestFLAGS   := -std=c++11 -pthread -lboost_filesystem -lboost_thread -lboost_system
 
