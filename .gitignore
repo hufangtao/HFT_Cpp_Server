@@ -1,5 +1,4 @@
 .vscode/
 *.o
 .idea/
-src/common/chat/
-src/common/proto/
+src/common/
