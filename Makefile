@@ -53,5 +53,6 @@ proto1:
 	done
 
 proto: 
+	rm -rf $(PROTO_DEST)/*
 	protoc -I=$(PROTO_DIR) --cpp_out=$(PROTO_DEST) $(PROTO_FILE)
 
