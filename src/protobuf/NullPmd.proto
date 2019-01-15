@@ -8,8 +8,8 @@ message NullPmd
 {
     enum Param
     {
-        NetPackageNullPmd_C2S       = 1;
-        NetTickNullPmd_S2C          = 2;
+        NetPackageNullPmd_C2S       = 0;
+        NetTickNullPmd_S2C          = 1;
     }
 }
 

@@ -1,6 +1,6 @@
 syntax = "proto3";
 package PlatPmd;
-import "type.proto";
+import "Types.proto";
 // 通信模块定义
 
 // 通信模块中包含了哪些模块
