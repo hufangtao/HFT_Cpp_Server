@@ -1,7 +1,6 @@
 syntax = "proto3";
-
 package types;
-// option optimize_for = LITE_RUNTIME;
+// 协议中使用的类型定义
 
 // 玩家信息
 message p_player

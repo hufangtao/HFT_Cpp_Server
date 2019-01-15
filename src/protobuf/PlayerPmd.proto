@@ -1,6 +1,5 @@
 syntax = "proto3";
-package section;
-// option optimize_for = LITE_RUNTIME;
+package PlatPmd;
 
 import "type.proto";
 

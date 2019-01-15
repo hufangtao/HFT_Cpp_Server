@@ -1,0 +1,9 @@
+syntax = "proto3";
+package ErrorCode;
+// 协议中错误码描述
+
+enum Error
+{
+    E_OK            = 0;    // 成功
+    E_UNKNOWN       = 1;    // 未知错误
+}
