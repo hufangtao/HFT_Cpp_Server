@@ -1,6 +1,6 @@
 syntax = "proto3";
 package PlatPmd;
-import "type.proto";
+import "Types.proto";
 // 游戏通信基础模块
 
 // 模块包含哪些协议，协议id

@@ -1,7 +1,6 @@
 syntax = "proto3";
 package PlatPmd;
-
-import "type.proto";
+import "Types.proto";
 
 // 账号信息相关
 message self_info_s2c

@@ -1,5 +1,5 @@
 syntax = "proto3";
-package types;
+package Types;
 // 协议中使用的类型定义
 
 // 玩家信息
