@@ -1,14 +1,19 @@
 #ifndef GATECLIENT_H
 #define GATECLIENT_H
 
+#include <iostream>
+#include <google/protobuf/message.h>
 #include <common/protomessage/ProtoMessage.h>
 #include <boost/asio.hpp>
+
+#include "Utils.h"
+
 using boost::asio::ip::tcp;
 
 /**
  * 一个client对应一个客户端链接
 */
-class GateClient
+class GateClient:public std::enable_shared_from_this<GateClient>
 {
   public:
     GateClient(tcp::socket socket);

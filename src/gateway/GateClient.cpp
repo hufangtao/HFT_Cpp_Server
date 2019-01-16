@@ -23,7 +23,6 @@ void GateClient::do_read_header()
             else
             {
                 std::cout << ec.message() << std::endl;
-                room_.leave(shared_from_this());
             }
         });
 }
@@ -39,10 +38,10 @@ void GateClient::do_read_body()
             {
                 // std::cout << "length: " << length << "  body_length" << read_msg_.body_length() << "\n";
                 std::cout.write(read_msg_.body(), read_msg_.body_length());
-                google::protobuf::Message *protoType = MessageSerializer::getMessageByCmdParam(read_msg_.pmd(), read_msg_.param());
+                const google::protobuf::Message *protoType = Utils::msgDecode->getMessageByCmdParam(read_msg_.pmd(), read_msg_.param()));
                 auto message = protoType->New();
                 // set data in message
-                message->ParseFromString(data);
+                message->ParseFromString(read_msg_.body());
 
                 // 把message交给server处理
                 
@@ -52,7 +51,6 @@ void GateClient::do_read_body()
             else
             {
                 std::cout << ec.message() << std::endl;
-                room_.leave(shared_from_this());
             }
         });
 }
