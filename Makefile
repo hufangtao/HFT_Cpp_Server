@@ -14,15 +14,15 @@ PROTO_DIR	:= $(ROOT_DIR)/src/protobuf
 PROTO_DEST	:= $(ROOT_DIR)/src/common/proto
 PROTO_FILE	:= $(shell find $(PROTO_DIR) -name '*.proto')
 
-INC_DIR		=  -I/usr/include -I/usr/local/include
+INC_DIR		=  -I/usr/include -I/usr/local/include -I/usr/local/lib
 INC_DIR		+= -I./ -I./src
 
-CFLAGS		:=  -pthread -std=c++11
+CFLAGS		:=  -pthread -std=c++11 -lprotobuf
 
-TestFLAGS   := -std=c++11 -pthread -lboost_filesystem -lboost_thread -lboost_system
+TestFLAGS   := -std=c++11 -pthread -lboost_filesystem -lboost_thread -lboost_system -lprotobuf
 
 
-LIB_NAME	:= rpc_client
+LIB_NAME	:= protobuf
 LIB_SUFFIX	:= .a
 LIB_TARGET	:= lib$(LIB_NAME)$(LIB_SUFFIX)
 
@@ -53,5 +53,6 @@ proto1:
 	done
 
 proto: 
+	rm -rf $(PROTO_DEST)/*
 	protoc -I=$(PROTO_DIR) --cpp_out=$(PROTO_DEST) $(PROTO_FILE)
 

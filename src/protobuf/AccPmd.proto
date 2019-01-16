@@ -1,9 +1,27 @@
 syntax = "proto3";
-package section;
+package PlatPmd;
 // option optimize_for = LITE_RUNTIME;
 
-// 账号信息相关
-message login_c2s
+// 账号模块协议定义
+message AccPmd
+{
+    enum Param
+    {
+        LoginAccPmd_C2S    = 0;
+        LoginAccPmd_S2C    = 1;
+    }
+}
+
+enum Error
+{
+    LoginOk             = 0;    // 登录成功
+    TokenFindError      = 1;    // 服务器没有token
+    TokenDiffError      = 2;    // token错误
+    VersionError        = 3;    // 版本验证
+}
+
+// 登录
+message LoginPmd_C2S
 {
     string platform = 1;                // 平台名字
     string game_account_id = 2;         // 游戏的账号Id
@@ -12,7 +30,8 @@ message login_c2s
     string channel_param = 5;           // 渠道其他参数
 }
 
-message login_s2c
+// 登录返回
+message LoginPmd_S2C
 {
     int32 code = 1;                 // 错误码
     int32 id = 2;                   // 角色id

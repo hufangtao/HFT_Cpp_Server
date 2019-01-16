@@ -1,10 +1,9 @@
 syntax = "proto3";
-
-package types;
-// option optimize_for = LITE_RUNTIME;
+package Types;
+// 协议中使用的类型定义
 
 // 玩家信息
-message p_player
+message P_Player
 {
     int32 id = 1;
     string name = 2;

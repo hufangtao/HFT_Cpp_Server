@@ -1,0 +1,18 @@
+syntax = "proto3";
+package PlatPmd;
+import "Types.proto";
+
+// 模块包含哪些协议，协议id
+message PlayerPmd
+{
+    enum Param
+    {
+        SelfInfoPlayerPmd_C2S       = 0;
+    }
+}
+
+// 账号信息相关
+message SelfInfoPlayerPmd_C2S
+{
+    Types.P_Player player = 1;
+}
