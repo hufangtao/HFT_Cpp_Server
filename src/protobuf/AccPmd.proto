@@ -7,8 +7,8 @@ message AccPmd
 {
     enum Param
     {
-        LoginPmd_C2S    = 0;
-        LoginPmd_S2C    = 1;
+        LoginAccPmd_C2S    = 0;
+        LoginAccPmd_S2C    = 1;
     }
 }
 
