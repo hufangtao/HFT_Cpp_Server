@@ -43,6 +43,9 @@ void GateClient::do_read_body()
                 auto message = protoType->New();
                 // set data in message
                 message->ParseFromString(data);
+
+                // 把message交给server处理
+                
                 // room_.deliver(read_msg_);
                 do_read_header();
             }
