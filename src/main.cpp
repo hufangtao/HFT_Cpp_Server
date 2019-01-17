@@ -1,5 +1,5 @@
 #include <iostream>
-#include "gateway/gateway_tcp_server.h"
+#include "gateway/GatewayTcpServer.h"
 
 #include "utils/common.h"
 
@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
         // 加载一些配置文件
         DEBUG("ian a msg",23);
         boost::asio::io_context io_context;
-        gateway_tcp_server::listen_tcp_port(io_context, 9001);
+        GatewayTcpServer::listen_tcp_port(io_context, 9001);
 
         io_context.run();
         // for (int i = 1; i < argc; ++i)
