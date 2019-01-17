@@ -1,4 +1,4 @@
-#include "GatewayTcpAcceptor.h"
+#include "GatewayTcpServer.h"
 
 std::list<GatewayTcpAcceptor> GatewayTcpAcceptor::acceptors;
 
