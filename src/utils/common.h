@@ -1,4 +1,4 @@
 #ifndef COMMON_H
 #define COMMON_H
-#include "utils/log/hlog.h"
+#include "utils/log/log.h"
 #endif

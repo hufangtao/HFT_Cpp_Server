@@ -82,3 +82,25 @@ std::string log::getLogType(logType type)
     }
     return msgType;
 }
+
+
+void printLog(std::stringstream &ss)
+{
+    ss << std::endl;
+}
+
+template <class T, class... Args>
+void printLog(std::stringstream &ss, T head, Args... rest)
+{
+    ss << head;
+    printLog(ss, rest...);
+}
+
+template <class... T>
+void LOG(std::string type, std::string date, std::string time, std::string file, std::string func, int line, T... args)
+{
+    std::stringstream ss;
+    ss << "[" << type << "]" << date << "-" << time << "-" << file << "-" << func << "-line" << line << ":" << std::endl;
+    printLog(ss, args...);
+    log::addMsg(ss.str());
+}
