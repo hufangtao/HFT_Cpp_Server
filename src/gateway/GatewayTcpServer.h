@@ -2,19 +2,19 @@
 #define GATEWAY_TCP_SERVER_H
 
 #include <list>
-#include "gateway_tcp_acceptor.h"
+#include "GatewayTcpAcceptor.h"
 
 /**
  * 负责生成多个linstener（acceptor）
 */
-class gateway_tcp_server
+class GatewayTcpServer
 {
   private:
-    static std::list<gateway_tcp_acceptor> acceptors;
+    static std::list<GatewayTcpAcceptor> acceptors;
 
   public:
-    gateway_tcp_server();
-    ~gateway_tcp_server();
+    GatewayTcpServer();
+    ~GatewayTcpServer();
 
     static void listen_tcp_port(boost::asio::io_context &io_context, int port);
 };
