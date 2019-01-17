@@ -1,6 +1,6 @@
 #include "GatewayTcpServer.h"
 
-std::list<GatewayTcpAcceptor> GatewayTcpAcceptor::acceptors;
+std::list<GatewayTcpAcceptor> GatewayTcpServer::acceptors;
 
 GatewayTcpServer::GatewayTcpServer()
 {
