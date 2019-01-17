@@ -38,7 +38,7 @@ void GateClient::do_read_body()
             {
                 // std::cout << "length: " << length << "  body_length" << read_msg_.body_length() << "\n";
                 std::cout.write(read_msg_.body(), read_msg_.body_length());
-                const google::protobuf::Message *protoType = Utils::msgDecode->getMessageByCmdParam(read_msg_.pmd(), read_msg_.param()));
+                const google::protobuf::Message *protoType = Utils::msgDecode->getMessageByCmdParam(read_msg_.pmd(), read_msg_.param());
                 auto message = protoType->New();
                 // set data in message
                 message->ParseFromString(read_msg_.body());
