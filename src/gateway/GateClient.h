@@ -6,7 +6,8 @@
 #include <common/protomessage/ProtoMessage.h>
 #include <boost/asio.hpp>
 
-#include "common/utils/Utils.h"
+#include "common/utils/ProtoUtils.h"
+#include "serverutils/common.h"
 
 using boost::asio::ip::tcp;
 

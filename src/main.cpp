@@ -1,7 +1,7 @@
 #include <iostream>
 #include "gateway/GatewayTcpServer.h"
 
-#include "utils/common.h"
+#include "serverutils/common.h"
 
 int main(int argc, char *argv[])
 {
