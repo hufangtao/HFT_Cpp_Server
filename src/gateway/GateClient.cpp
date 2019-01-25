@@ -36,16 +36,13 @@ void GateClient::do_read_body()
         [this, self](boost::system::error_code ec, std::size_t length) {
             if (!ec)
             {
-                // std::cout << "length: " << length << "  body_length" << read_msg_.body_length() << "\n";
                 std::cout.write(read_msg_.body(), read_msg_.body_length());
                 const google::protobuf::Message *protoType = ProtoUtils::msgDecode->getMessageByCmdParam(read_msg_.pmd(), read_msg_.param());
-                auto message = protoType->New();
-                // set data in message
+                google::protobuf::Message *message = protoType->New();
                 message->ParseFromString(read_msg_.body());
+                const google::protobuf::Descriptor *descriptor = message->GetDescriptor();
+                INFO("recieve: ", descriptor->name(), message);
 
-                // 把message交给server处理
-                
-                // room_.deliver(read_msg_);
                 do_read_header();
             }
             else

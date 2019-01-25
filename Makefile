@@ -1,10 +1,9 @@
 CC := g++
-CC += -g
 
 ROOT_DIR	= $(shell pwd)
 SRC_DIR		= $(ROOT_DIR)
 SRC_FILES_CPP	:= $(shell find $(SRC_DIR) -name '*.cpp')
-SRC_FILES_C	:= $(shell find $(SRC_DIR) -name '*.c')
+SRC_FILES_C		:= $(shell find $(SRC_DIR) -name '*.c')
 SRC_FILES_CC	:= $(shell find $(SRC_DIR) -name '*.cc')
 OBJ_FILES	:= $(SRC_FILES_CPP:.cpp=.o)
 OBJ_FILES	+= $(SRC_FILES_C:.c=.o)
@@ -14,17 +13,10 @@ PROTO_DIR	:= $(ROOT_DIR)/src/protobuf
 PROTO_DEST	:= $(ROOT_DIR)/src/common/proto
 PROTO_FILE	:= $(shell find $(PROTO_DIR) -name '*.proto')
 
-INC_DIR		=  -I/usr/include -I/usr/local/include -I/usr/local/lib
-INC_DIR		+= -I./ -I./src
+INC_DIR		:= -I./src -I/usr/local/protobuf/include
 
-CFLAGS		:=  -pthread -std=c++11 -lprotobuf
-
-TestFLAGS   := -std=c++11 -pthread -lboost_filesystem -lboost_thread -lboost_system -lprotobuf
-
-
-LIB_NAME	:= protobuf
-LIB_SUFFIX	:= .a
-LIB_TARGET	:= lib$(LIB_NAME)$(LIB_SUFFIX)
+CFLAGS		:= -pthread 
+CFLAGS		+= -L/usr/local/protobuf/lib -lprotobuf 
 
 TARGET		:= HFT_Server
 
@@ -33,18 +25,18 @@ TARGET		:= HFT_Server
 all: $(TARGET);
 
 $(TARGET): $(OBJ_FILES)
-	$(CC) $(CFLAGS) -o $@ $(OBJ_FILES)
+	$(CC) -o $@ $(OBJ_FILES) $(CFLAGS)
 	@echo **********Build*********
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) $(INC_DIR) -c $< -o $@
+	$(CC) -c $< $(INC_DIR) -o $@ 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INC_DIR) -c $< -o $@
+	$(CC) -c $< $(INC_DIR) -o $@
 %.o: %.cc
-	$(CC) $(CFLAGS) $(INC_DIR) -c $< -o $@
+	$(CC) -c $< $(INC_DIR) -o $@
 
 clean:
-	rm -f $(TARGET) $(OBJ_FILES)
+	-rm -f $(TARGET) $(OBJ_FILES)
 
 proto1:
 	for file in $(PROTO_FILE)
