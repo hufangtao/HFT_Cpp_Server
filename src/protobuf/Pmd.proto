@@ -15,7 +15,7 @@ enum PlatCommand
     PlatCommand_TaskPmd     = 7;    // 任务模块
     PlatCommand_AwardPmd    = 8;    // 奖励模块
     PlatCommand_PaymentPmd  = 9;    // 充值模块
-    PlatCommand_RankPmd     = 10;    // 排行榜模块
-    PlatCommand_PlayPmd     = 11;    // 玩法模块
-    PlatCommand_SignInPmd   = 12;    // 签到模块
+    PlatCommand_RankPmd     = 10;   // 排行榜模块
+    PlatCommand_PlayPmd     = 11;   // 玩法模块
+    PlatCommand_SignInPmd   = 12;   // 签到模块
 }

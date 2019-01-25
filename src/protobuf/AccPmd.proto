@@ -21,7 +21,7 @@ enum Error
 }
 
 // 登录
-message LoginPmd_C2S
+message LoginAccPmd_C2S
 {
     string platform = 1;                // 平台名字
     string game_account_id = 2;         // 游戏的账号Id
@@ -31,7 +31,7 @@ message LoginPmd_C2S
 }
 
 // 登录返回
-message LoginPmd_S2C
+message LoginAccPmd_S2C
 {
     int32 code = 1;                 // 错误码
     int32 id = 2;                   // 角色id
