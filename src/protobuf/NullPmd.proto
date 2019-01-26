@@ -24,7 +24,7 @@ message NetPackageNullPmd_C2S
     int32 time        = 8;    // client use
 }
 
-message NetTickNullPmd_SC
+message NetTickNullPmd_S2C
 {
     int32 requesttime = 1; // 对方的请求时间原封返回
     int32 mytime      = 2; // 当前应答的本地时间,秒,必须填,用来防止加速
