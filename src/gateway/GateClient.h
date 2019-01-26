@@ -7,7 +7,7 @@
 #include <boost/asio.hpp>
 
 #include "common/utils/ProtoUtils.h"
-#include "serverutils/common.h"
+#include "common/utils/common.h"
 
 using boost::asio::ip::tcp;
 

@@ -1,14 +1,13 @@
 #include <iostream>
 #include "gateway/GatewayTcpServer.h"
 
-#include "serverutils/common.h"
+#include "common/utils/common.h"
 
 int main(int argc, char *argv[])
 {
     try
     {
         // 加载一些配置文件
-        DEBUG("ian a msg",23);
         boost::asio::io_context io_context;
         GatewayTcpServer::listen_tcp_port(io_context, 9001);
 

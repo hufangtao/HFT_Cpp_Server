@@ -16,8 +16,10 @@ void GateClient::do_read_header()
         socket_,
         boost::asio::buffer(read_msg_.data(), ProtoMessage::HEADER_LENGTH + ProtoMessage::PMD_LENGTH + ProtoMessage::PARAM_LENGTH),
         [this, self](boost::system::error_code ec, std::size_t length) {
+            INFO("read header callback-------------:length,,,", length, "   msg length:", read_msg_.body_length());
             if (!ec && read_msg_.decode_header())
             {
+                INFO("   decode msg ---------- length:", read_msg_.body_length());
                 do_read_body();
             }
             else
@@ -34,6 +36,7 @@ void GateClient::do_read_body()
         socket_,
         boost::asio::buffer(read_msg_.body(), read_msg_.body_length()),
         [this, self](boost::system::error_code ec, std::size_t length) {
+            INFO("read body callback -----------------");
             if (!ec)
             {
                 std::cout.write(read_msg_.body(), read_msg_.body_length());
