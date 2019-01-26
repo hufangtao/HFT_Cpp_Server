@@ -3,7 +3,7 @@ package PlatPmd;
 // 游戏通信基础模块
 
 // 模块包含哪些协议，协议id
-message PlatCommand_NullPmd
+message NullPmd
 {
     enum Param
     {

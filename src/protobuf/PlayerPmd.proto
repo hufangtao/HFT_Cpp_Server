@@ -3,7 +3,7 @@ package PlatPmd;
 import "Types.proto";
 
 // 模块包含哪些协议，协议id
-message PlatCommand_PlayerPmd
+message PlayerPmd
 {
     enum Param
     {
