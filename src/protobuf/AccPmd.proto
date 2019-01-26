@@ -3,7 +3,7 @@ package PlatPmd;
 // option optimize_for = LITE_RUNTIME;
 
 // 账号模块协议定义
-message AccPmd
+message PlatCommand_AccPmd
 {
     enum Param
     {
