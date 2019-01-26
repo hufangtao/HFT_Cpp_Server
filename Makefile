@@ -9,7 +9,7 @@ OBJ_FILES	:= $(SRC_FILES_CPP:.cpp=.o)
 OBJ_FILES	+= $(SRC_FILES_C:.c=.o)
 OBJ_FILES	+= $(SRC_FILES_CC:.cc=.o)
 
-PROTO_DIR	:= $(ROOT_DIR)/src/protobuf
+PROTO_DIR	:= $(ROOT_DIR)/src/common/protobuf
 PROTO_DEST	:= $(ROOT_DIR)/src/common/proto
 PROTO_FILE	:= $(shell find $(PROTO_DIR) -name '*.proto')
 
