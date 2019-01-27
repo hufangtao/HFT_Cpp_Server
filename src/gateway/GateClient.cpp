@@ -43,8 +43,17 @@ void GateClient::do_read_body()
                 const google::protobuf::Message *protoType = ProtoUtils::msgDecode->getMessageByCmdParam(read_msg_.pmd(), read_msg_.param());
                 google::protobuf::Message *message = protoType->New();
                 message->ParseFromString(read_msg_.body());
+
+                DecodeMessage(message);
+
                 const google::protobuf::Descriptor *descriptor = message->GetDescriptor();
-                INFO("recieve: ", descriptor->name(), message);
+                INFO("recieve: ", descriptor->name());
+                PlatPmd::LoginAccPmd_C2S* loginMessage = dynamic_cast<PlatPmd::LoginAccPmd_C2S*>(message);
+                INFO("recieve meesage platform:", loginMessage->platform());
+                INFO("recieve meesage channel_open_id:", loginMessage->channel_open_id());
+                INFO("recieve meesage game_account_id:", loginMessage->game_account_id());
+                INFO("recieve meesage game_account_sign:", loginMessage->game_account_sign());
+                INFO("recieve meesage channel_param:", loginMessage->channel_param());
 
                 do_read_header();
             }

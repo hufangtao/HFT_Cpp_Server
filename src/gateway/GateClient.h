@@ -8,6 +8,7 @@
 
 #include "common/utils/ProtoUtils.h"
 #include "common/utils/common.h"
+#include "ProtoMessageDecod.h"
 
 using boost::asio::ip::tcp;
 
