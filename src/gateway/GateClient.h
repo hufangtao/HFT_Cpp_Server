@@ -8,20 +8,23 @@
 
 #include "common/utils/ProtoUtils.h"
 #include "common/utils/common.h"
-#include "ProtoMessageDecod.h"
 
 using boost::asio::ip::tcp;
 
+class PlayerServer;
 /**
  * 一个client对应一个客户端链接
 */
-class GateClient:public std::enable_shared_from_this<GateClient>
+class GateClient : public std::enable_shared_from_this<GateClient>
 {
   public:
     GateClient(tcp::socket socket);
     void start();
+    void set_player_server(std::shared_ptr<PlayerServer> playerServer);
 
   private:
+    std::shared_ptr<PlayerServer> playerServer;
+    // PlayerServer* playerServer;
     tcp::socket socket_;
     ProtoMessage read_msg_;
     void do_read_header();

@@ -2,3 +2,4 @@
 *.o
 .idea/
 src/common/
+HFT_SERVER
