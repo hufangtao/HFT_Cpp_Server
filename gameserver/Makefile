@@ -15,19 +15,22 @@ LD_LIBS		+= boost_thread boost_system boost_coroutine boost_context boost_chrono
 
 APP_TARGET	:= gameserver
 
-C_FLAGS		:= -g
+C_FLAGS		:= -g -Wall -std=c++0x
 C_FLAGS		+= $(addprefix -I,$(INC_DIR))
 LD_FLAGS	+= $(addprefix -L,$(LD_LIBS))
 
-$(APP_TARGET): main.o
+$(APP_TARGET): main.o player.o
 	$(XX) $(LD_FLAGS) -o $@ $^
 
 main.o: code/main.cpp
 	$(XX) $(C_FLAGS) -c code/main.cpp
 
+player.o: code/player.h code/player.cpp
+	$(XX) $(C_FLAGS) -c code/player.cpp
+
 
 .PHONY: clean
 
 clean:
-	-rm main.o
+	-rm *.o
 
