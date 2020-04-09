@@ -7,27 +7,38 @@
 using namespace boost;
 using namespace std;
 
+void testPlayer(Player* player)
+{
+    boost::shared_ptr<Player> p1(player);
+}
+
 int main()
 {
-    timer t;
-    int a = lexical_cast<int>("12");
-    cout << a << endl;
-    cout << "Hello World" << endl;
-    try
+    Player* player_ = new Player();
+    testPlayer(player_);
+
+    // cout << "p1:" << p1.use_count() << "p2:" << player_->use_count();
+    cout << "p2:" << player_->getLevel();
+
+    int a;
+    cout << "pls cin a" << endl;
+    cin >> a;
+
+    switch (a)
     {
-        int err = lexical_cast<int>("789edc", 4);
-        cout << err << endl;
-    }
-    catch (const std::exception& e)
-    {
-        cout << e.what() << endl;
+        case 1:
+        {
+            cout << "is a 1" << endl;
+            break;
+        }
+        case 2:
+        {
+            cout << "is a 2" << endl;
+            break;
+        }
     }
 
-    auto up = boost::make_unique<int>(20);
-    auto up1 = up;
-    cout << "up:" << *up << "_" << *up1 << endl;
+    cout << "the end" << endl;
 
-    Player player;
-    cout << "player level :" << player.getLevel() << endl;
     return 0;
 }
