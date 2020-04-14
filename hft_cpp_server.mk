@@ -1,4 +1,8 @@
-all: common gameserver
+.PHONY: all common gameserver
+
+TARGET_SET	:= gameserver
+
+all: $(TARGET_SET)
 
 common:
 	echo -e "$@: $(MAKE)"
@@ -7,3 +11,7 @@ common:
 gameserver:
 	echo -e "$@: $(MAKE)"
 	cd gameserver; $(MAKE)
+
+clean:
+	cd $(TARGET_SET); make clean
+

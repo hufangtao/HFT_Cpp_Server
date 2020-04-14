@@ -1,9 +1,16 @@
-MK_FILE	:= hft_cpp_server.mk
+include ./make_inc.mk
 
-JOBS_NUM		:= 12
-MAKE			:= make
-PARALLEL_PARAM	:= -j $(JOBS_NUM)
+MK_FILE	:= hft_cpp_server.mk
+TARGET_SET		:= gameserver
 
 all:
-	echo -e "$@: $(MAKE) $(PARALLEL_PARAM)"
+	@echo -e "$@: $(MAKE) $(PARALLEL_PARAM)"
 	$(MAKE) $(PARALLEL_PARAM) -f $(MK_FILE) $@
+
+$(TARGET_SET):
+	@echo -e "$@: $(MAKE) $(PARALLEL_PARAM)"
+	$(MAKE) $(PARALLEL_PARAM) -f $(MK_FILE) $@
+
+clean:
+	$(MAKE) -f $(MK_FILE) $@
+

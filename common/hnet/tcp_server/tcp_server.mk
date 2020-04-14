@@ -4,7 +4,7 @@
 #	路径定义
 #
 CUR_DIR		:= ./
-ROOT_DIR	:= ../../
+ROOT_DIR	:= ../../../
 EXT_DIR		:= ROOT_DIR/ext
 TARGET_LIB_DIR	:= $(CUR_DIR)/lib/
 INC_DIR		:= $(CUR_DIR)/code
@@ -20,14 +20,15 @@ include $(EXT_DIR)/boost_1_56_0/MakeFile.inc
 #
 #	所需编译的源文件
 #
-SRC_FILES	:= $(wildcard $(SRC_DIR)/*.cpp)
+ALL_DIRS	:= $(shell find $(SRC_DIR) -maxdepth 3 -type d)
+SRC_FILES	:= $(foreach dir,$(ALL_DIRS),$(wildcard $(dir)/*.cpp))
 OBJ_FILES	:= $(SRC_FILES:.cpp=.o)
 DEP_FILES	:= $(foreach obj, $(OBJ_FILES), $(obj).dep)
 
 #
 #	目标模块
 #
-LIB_NAME	:= hft_commom
+LIB_NAME	:= tcp_server
 SO_TARGET	:= $(TARGET_LIB_DIR)/lib$(LIB_NAME).a
 
 #

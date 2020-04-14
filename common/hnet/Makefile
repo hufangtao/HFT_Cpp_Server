@@ -1,7 +1,7 @@
-include ../make_inc.mk
+include ../../make_inc.mk
 
-MK_FILE	:= common.mk
-TARGET_SET		:= hnet hdb
+MK_FILE	:= hnet.mk
+TARGET_SET		:= tcp_client tcp_server
 
 all:
 	@echo -e "$@: $(MAKE) $(PARALLEL_PARAM)"
