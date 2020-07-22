@@ -4,3 +4,4 @@
 src/common/
 HFT_SERVER
 gameserver/gameserver
+common/hnet/tcp_server/lib
