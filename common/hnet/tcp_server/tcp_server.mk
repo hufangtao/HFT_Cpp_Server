@@ -43,5 +43,6 @@ all: $(SO_TARGET)
 	@echo -e "\033[36m======== build $(LIB_NAME) succ ========\033[0m"
 
 $(SO_TARGET): $(ALL_BUILD_OBJ)
+	ar -r $@ $^
 
-
+$(ALL_BUILD_OBJ): 
