@@ -14,7 +14,7 @@ LD_LIBS		+= boost_thread boost_system boost_coroutine boost_context boost_chrono
 
 APP_TARGET	:= gameserver
 
-include $(EXT_DIR)/boost_1_56_0/MakeFile.inc
+include $(EXT_DIR)/boost/MakeFile.inc
 
 C_FLAGS		:= -g -Wall -Werror -O0 -std=c++0x
 C_FLAGS		+= $(addprefix -I,$(INC_DIR))

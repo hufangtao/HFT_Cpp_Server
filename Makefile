@@ -1,5 +1,7 @@
 include ./make_inc.mk
 
+.PHONY: gameserver
+
 MK_FILE	:= hft_cpp_server.mk
 TARGET_SET		:= gameserver
 
