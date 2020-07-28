@@ -1,18 +1,18 @@
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
-#include "boost/asio.hpp"
+#include "ext_head.h"
 
 class Timer
 {
 	public:
-		Timer(boost::asio:io_context& io);
+		Timer(asio::io_context& io);
 		~Timer();
 	
-		print(const boost:system::error_code& err_code);
+		void print(const boost::system::error_code& err_code);
 	
 	private:
-		boost::asio::steady_timer timer_;
+		asio::steady_timer timer_;
 		int counter_;
 };
 
