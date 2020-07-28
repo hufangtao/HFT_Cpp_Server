@@ -4,7 +4,7 @@ CC	:=	gcc
 XX	:=	g++
 
 ROOT_DIR	:= ../
-EXT_DIR		:=	$(ROOT_DIR)/ext/
+EXT_DIR		:= $(ROOT_DIR)/ext/
 CUR_DIR		:= ./
 SRC_DIR		:= $(CUR_DIR)/code
 INC_DIR		:= $(CUR_DIR)/code
@@ -16,27 +16,30 @@ APP_TARGET	:= gameserver
 
 include $(EXT_DIR)/boost/MakeFile.inc
 
-C_FLAGS		:= -g -Wall -Werror -O0 -std=c++0x
+C_FLAGS		:= -g -MM -Wall -Werror -O0 -std=c++17
 C_FLAGS		+= $(addprefix -I,$(INC_DIR))
 LD_FLAGS	+= $(addprefix -L,$(LIB_DIR)) $(addprefix -l, $(LD_LIBS))
 LIB_DIR_SH  += $(shell echo "$(LIB_DIR)"| sed -e "s/ \./:\./g")
 
-$(APP_TARGET): main.o player.o
+SOURCE_FILES := $(wildcard $(SRC_DIR)/*.cpp)
+ALL_PROJECTS := $(SOURCE_FILES:.cpp=.o)
+
+$(APP_TARGET): $(ALL_PROJECTS)
+	@echo "C_FLAGS:"$(C_FLAGS)
+	@echo "SOURCE_FILES:"$(SOURCE_FILES)
+	@echo "ALL_PROJECTS:"$(ALL_PROJECTS)
 	@echo -e "\033[36m[$(APP_TARGET) LINK] $@\033[0m"
-	@$(XX) $(LD_FLAGS) -o $@ $^
+	$(XX) $(LD_FLAGS) -o $@ $(ALL_PROJECTS)
 	export LD_LIBRARY_PATH=$(LIB_DIR_SH)
 
-main.o: code/main.cpp
-	$(XX) $(C_FLAGS) -c code/main.cpp
-
-player.o: code/player.h code/player.cpp
-	$(XX) $(C_FLAGS) -c code/player.cpp
+%.o:%.cpp
+	$(XX) $(C_FLAGS) -c $<
 
 lib:
 	export LD_LIBRARY_PATH=$(LIB_DIR_SH)
 
-.PHONY: clean
+.PHONY: gameserver clean
 
 clean:
-	-rm *.o
+	-rm $(ALL_PROJECTS)
 
