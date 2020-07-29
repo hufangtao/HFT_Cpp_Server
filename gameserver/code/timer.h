@@ -5,15 +5,15 @@
 
 class Timer
 {
-	public:
-		Timer(asio::io_context& io);
-		~Timer();
-	
-		void print(const boost::system::error_code& err_code);
-	
-	private:
-		asio::steady_timer timer_;
-		int counter_;
+    public:
+        Timer(asio::io_context& io);
+        ~Timer();
+
+        void print();
+
+    private:
+        asio::steady_timer timer_;
+        int counter_;
 };
 
 #endif
