@@ -10,7 +10,7 @@ SRC_DIR		:= $(CUR_DIR)/code
 INC_DIR		:= $(CUR_DIR)/code
 LIB_DIR		:= ./
 
-LD_LIBS		+= boost_thread boost_system boost_coroutine boost_context boost_chrono boost_regex
+LD_LIBS		+= boost_thread boost_system boost_coroutine boost_context boost_chrono boost_regex pthread
 
 APP_TARGET	:= gameserver
 
