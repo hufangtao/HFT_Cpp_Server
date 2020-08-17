@@ -1,7 +1,7 @@
 #include "sync_tcp_client.h"
 
-SyncTcpClient::SyncTcpClient(asio::io_context& io, std::string host):
-	resolver_(io), socket_(io), host_(host)
+SyncTcpClient::SyncTcpClient(asio::io_context& io, std::string host, std::string port):
+	resolver_(io), socket_(io), host_(host), port_(port)
 {
 
 }
@@ -19,7 +19,7 @@ void SyncTcpClient::connect()
 		return;
 	}
 
-	tcp::resolver::results_type end_points = resolver_.resolve(host_, "daytime");
+	tcp::resolver::results_type end_points = resolver_.resolve(host_, port_);
 	asio::connect(socket_, end_points);
 }
 

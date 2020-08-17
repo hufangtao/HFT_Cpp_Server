@@ -6,7 +6,7 @@ using namespace boost::asio::ip;
 class SyncTcpClient
 {
 	public:
-		SyncTcpClient(asio::io_context& io, std::string host);
+		SyncTcpClient(asio::io_context& io, std::string host, std::string port);
 		~SyncTcpClient();
 
 	public:
@@ -17,6 +17,7 @@ class SyncTcpClient
 		tcp::resolver resolver_;
 		tcp::socket socket_;
 		std::string host_;
+		std::string port_;
 };
 
 #endif

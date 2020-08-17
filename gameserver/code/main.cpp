@@ -1,18 +1,11 @@
 #include "player.h"
-#include "timer.h"
-
-void run_io(asio::io_context* io)
-{
-	io->run();
-}
+#include "tcp_server.h"
 
 int main()
 {
     asio::io_context io;
-    Timer timer(io);
-	std::thread t1(&run_io, &io);
+	TcpServer server(io);
     io.run();
-	t1.join();
     return 0;
 }
 

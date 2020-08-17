@@ -2,7 +2,7 @@
 
 TcpServer::TcpServer(asio::io_context& io_context):
 	io_context_(io_context),
-	acceptor_(io_context, tcp::endpoint(tcp::v4(), 13))
+	acceptor_(io_context, tcp::endpoint(tcp::v4(), 22001))
 {
 	start_accept();
 }
@@ -14,17 +14,24 @@ TcpServer::~TcpServer()
 
 void TcpServer::start_accept()
 {
-	tcp::connection::pointer new_connection = tcp::connection::create(io_context_);
+	std::shared_ptr<TcpConnection> new_connection_ptr = TcpConnection::create(io_context_);
 
-	accpetor_.async_accpet(new_connection->socket(), 
-				std::bind(&TcpServer::handle_accept, this, new_connection, boost::asio::placeholders::error));
+	acceptor_.async_accept(
+				new_connection_ptr->socket(), 
+				boost::bind(
+						&TcpServer::handle_accept, 
+						this, 
+						new_connection_ptr, 
+						asio::placeholders::error
+				)
+	);
 }
 
-void TcpServer::handle_accept(tcp::connection::pointer new_connection, const boost::system::error_code& error)
+void TcpServer::handle_accept(std::shared_ptr<TcpConnection> connection_ptr, const boost::system::error_code& error)
 {
 	if (!error)
 	{
-		new_connection->start();
+		connection_ptr->start();
 	}
 
 	start_accept();
