@@ -1,6 +1,7 @@
 #include <iostream>
-#include <boost/asio.hpp>
 #include <functional>
+#include <boost/asio.hpp>
+#include <boost/thread.hpp>
 #include <thread>
 #include <boost/bind/bind.hpp>
 #include <memory>

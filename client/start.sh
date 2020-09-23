@@ -2,5 +2,5 @@
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./:../ext/boost/lib
 
-./gameserver
+./client
 
