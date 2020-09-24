@@ -21,7 +21,7 @@ C_FLAGS		+= $(addprefix -I,$(INC_DIR))
 LD_FLAGS	+= $(addprefix -L,$(LIB_DIR)) $(addprefix -l, $(LD_LIBS))
 LIB_DIR_SH  += $(shell echo "$(LIB_DIR)"| sed -e "s/ \./:\./g")
 
-SOURCE_FILES := $(wildcard $(SRC_DIR)/*.cpp)
+SOURCE_FILES := $(wildcard $(SRC_DIR)/*.cpp $(SRC_DIR)/*/*.cpp)
 ALL_PROJECTS := $(SOURCE_FILES:.cpp=.o)
 
 $(APP_TARGET): $(ALL_PROJECTS)

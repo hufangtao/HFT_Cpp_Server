@@ -1,11 +1,10 @@
 #include "epoll_server.h"
 #include <sys/epoll.h>
+#include <fcntl.h>
 
 EpollServer::EpollServer()
     : epoll_fd_(doCreateEpoll())
 {
-
-    epoll_ctl(epoll_fd_, EPOLL_CTL_ADD,);
 }
 
 EpollServer::~EpollServer()
@@ -13,9 +12,9 @@ EpollServer::~EpollServer()
 
 }
 
-EpollSevrer::doCreateEpoll()
+int EpollServer::doCreateEpoll()
 {
-    int fd = epoll_create(epoll_size);
+    int fd = epoll_create(EPOLL_SIZE);
 
     // 创建成功
     if (fd != -1)

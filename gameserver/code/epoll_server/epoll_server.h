@@ -8,11 +8,11 @@ class EpollServer
         ~EpollServer();
 
     public:
-        int32_t doCreateEpoll();
+        int doCreateEpoll();
 
     private:
         enum {EPOLL_SIZE = 20000};
-        int32_t epoll_fd_;
+        int epoll_fd_;
 };
 
-// __EPOLL_SERVER__
+#endif // __EPOLL_SERVER__
