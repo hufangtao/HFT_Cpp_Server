@@ -5,6 +5,7 @@
 #include <thread>
 #include <boost/bind/bind.hpp>
 #include <memory>
+#include <stdio.h>
 
 using namespace std;
 using namespace boost;
