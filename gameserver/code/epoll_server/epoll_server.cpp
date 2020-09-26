@@ -70,3 +70,68 @@ int EpollServer::startListen()
     return 0;
 }
 
+int EpollServer::startAccept()
+{
+    if (listen_fd_ == 0 || epoll_fd_ == 0)
+    {
+        return -1;
+    }
+
+    epoll_event events[MAX_EVENTS_SIZE];
+    bzero(events, sizeof(*events));
+
+    while(true)
+    {
+        int valid_events_num = epoll_wait(epoll_fd_, events, MAX_EVENTS_SIZE, -1);
+
+        for (int idx = 0; idx < valid_events_num; ++idx)
+        {
+            if ((events[idx].events & EPOLLERR) || 
+                (events[idx].events & EPOLLHUP) || 
+                !(events[idx].events & EPOLLIN))
+            {
+                printf("epoll error");
+                continue;
+            }
+
+            // 如果是listen_fd过来的消息
+            if (listen_fd_ == events[idx].data.fd)
+            {
+
+            }
+        }
+    }
+
+    return 0;
+}
+
+int EpollServer::acceptConnection()
+{
+    while(true)
+    {
+        sockaddr in_addr;
+        socklen_t in_len;
+
+        int socket_fd = accept(listen_fd_, &in_addr, &in_len);
+        if (socket_fd == -1)
+        {
+            if ((errno == EAGAIN)||(errno == EWOULDBLOCK))
+            {
+                // 已经处理了所有连接
+                break;
+            }
+            else
+            {
+                printf("");
+                break;
+            }
+        }
+    }
+    return 0;
+}
+
+int EpollServer::acceptData()
+{
+    return 0;
+}
+

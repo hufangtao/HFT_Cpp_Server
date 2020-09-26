@@ -16,8 +16,11 @@ class EpollServer
         int startListen();
         int startAccept();
 
+        int acceptConnection();
+        int acceptData();
+
     private:
-        enum {EPOLL_SIZE = 20000};
+        enum {MAX_EVENTS_SIZE = 1024, EPOLL_SIZE = 20000};
         int epoll_fd_;
         int listen_fd_;
 };
