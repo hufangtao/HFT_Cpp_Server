@@ -3,11 +3,11 @@
 
 int main()
 {
-    asio::io_context io;
-	SyncTcpClient client(io, "localhost", "22001");
+	asio::io_context io;
+	SyncTcpClient client(io, "127.0.0.1", "9999");
 	client.connect();
-    io.run();
+	io.run();
 	client.syncRead();
-    return 0;
+	return 0;
 }
 

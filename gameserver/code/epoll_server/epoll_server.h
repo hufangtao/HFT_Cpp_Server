@@ -11,13 +11,14 @@ class EpollServer
         ~EpollServer();
 
     public:
-        int doCreateEpoll();
         int bindPort(uint port);
         int startListen();
         int startAccept();
 
+    private:
+        int doCreateEpoll();
         int acceptConnection();
-        int acceptData();
+        int acceptData(int read_fd);
 
     private:
         enum {MAX_EVENTS_SIZE = 1024, EPOLL_SIZE = 20000};

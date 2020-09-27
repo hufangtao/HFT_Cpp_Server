@@ -12,20 +12,19 @@ EpollServer::EpollServer()
 
 EpollServer::~EpollServer()
 {
-
+    close(listen_fd_);
 }
 
 int EpollServer::doCreateEpoll()
 {
     int fd = epoll_create(EPOLL_SIZE);
-
-    // 创建成功
     if (fd == -1)
     {
         printf("create epoll fd error");
         return -1;
     }
 
+    printf("create epoll fd=%d", fd);
     return fd;
 }
 
@@ -42,6 +41,7 @@ int EpollServer::bindPort(uint port)
     my_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     ::bind(listen_fd_, (struct sockaddr *)&my_addr, sizeof(my_addr));
 
+    printf("bind on port=%d", port);
     return 0;
 }
 
@@ -97,8 +97,15 @@ int EpollServer::startAccept()
             // 如果是listen_fd过来的消息
             if (listen_fd_ == events[idx].data.fd)
             {
-
+                acceptConnection();
+                continue;
             }
+            else
+            {
+                acceptData(events[idx].data.fd);
+                continue;
+            }
+            
         }
     }
 
@@ -122,16 +129,71 @@ int EpollServer::acceptConnection()
             }
             else
             {
-                printf("");
+                printf("accept error");
                 break;
             }
         }
+
+        char host_buf[NI_MAXHOST], port_buf[NI_MAXSERV];
+        if (0 != getnameinfo(&in_addr, in_len, host_buf, sizeof(host_buf), port_buf, sizeof(host_buf), NI_NUMERICHOST | NI_NUMERICSERV))
+        {
+            break;
+        }
+
+        printf("accepted connection on descriptor %d (host:%s, port=%s)\n", socket_fd, host_buf, port_buf);
+
+        // 将接收的new connection加入到epoll监听中
+        epoll_event socket_event;
+        socket_event.data.fd = socket_fd;
+        socket_event.events = EPOLLIN | EPOLLET;
+        if (-1 == epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, socket_fd, &socket_event))
+        {
+            printf("epoll ctl error");
+            break;
+        }
     }
+
     return 0;
 }
 
-int EpollServer::acceptData()
+int EpollServer::acceptData(int read_fd)
 {
+    int done = 0;
+    while(true)
+    {
+        char buf[128];
+
+        int size = read(read_fd, buf, sizeof(buf));
+        if (size == -1)
+        {
+            if (errno != EAGAIN)
+            {
+                printf("read error");
+                done = 1;
+            }
+            break;
+        }
+
+        if (size == 0)
+        {
+            // EOF，远程已经关闭连接
+            done = 1;
+            break;
+        }
+
+        // 标准输出
+        if (-1 == write(1, buf, size))
+        {
+            printf("write error");
+            break;
+        }
+
+        if (done)
+        {
+            printf("close connection on fd %d\n", read_fd);
+            close(read_fd);
+        }
+    }
     return 0;
 }
 
