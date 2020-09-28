@@ -32,6 +32,7 @@ int EpollServer::bindPort(uint port)
 {
     // 创建监听fd
     listen_fd_ = socket(AF_INET, SOCK_STREAM, 0);
+    printf("create listen socket fd=%d\n", listen_fd_);
 
     // 绑定监听fd
     sockaddr_in my_addr;
@@ -39,9 +40,14 @@ int EpollServer::bindPort(uint port)
     my_addr.sin_family = AF_INET;
     my_addr.sin_port = htons(port);
     my_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    ::bind(listen_fd_, (struct sockaddr *)&my_addr, sizeof(my_addr));
+    int ret_code = ::bind(listen_fd_, (struct sockaddr *)&my_addr, sizeof(my_addr));
+    if (0 != ret_code)
+    {
+        printf("bind error, ret_code=%d\n", ret_code);
+        return -1;
+    }
 
-    printf("bind on port=%d\n", port);
+    printf("bind on port=%d, ret_code=%d\n", port, ret_code);
     return 0;
 }
 

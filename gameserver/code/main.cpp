@@ -8,8 +8,12 @@ int main()
     printf("create epoll server b\n");
     EpollServer epoll_server;
     printf("create epoll server\n");
-    epoll_server.bindPort(9999);
-    epoll_server.startAccept();
+    if (0 != epoll_server.bindPort(9999))
+    {
+        return 0;
+    }
+
     epoll_server.startListen();
+    epoll_server.startAccept();
     return 0;
 }

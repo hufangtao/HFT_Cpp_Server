@@ -20,7 +20,13 @@ void SyncTcpClient::connect()
 	}
 
 	tcp::resolver::results_type end_points = resolver_.resolve(host_, port_);
-	asio::connect(socket_, end_points);
+	cout << "endpoints size: " << end_points.size() << endl;
+	boost::system::error_code ec;
+	asio::connect(socket_, end_points, ec);
+	if (ec)
+	{
+		cout << ec.message() << endl;
+	}
 }
 
 int SyncTcpClient::syncRead()
@@ -38,6 +44,7 @@ int SyncTcpClient::syncRead()
 		else if (error)
 		{
 			cout << "read exception" << endl;
+			break;
 		}
 		std::cout.write(buff, len);
 	}
