@@ -20,11 +20,11 @@ int EpollServer::doCreateEpoll()
     int fd = epoll_create(EPOLL_SIZE);
     if (fd == -1)
     {
-        printf("create epoll fd error");
+        printf("create epoll fd error\n");
         return -1;
     }
 
-    printf("create epoll fd=%d", fd);
+    printf("create epoll fd=%d\n", fd);
     return fd;
 }
 
@@ -41,7 +41,7 @@ int EpollServer::bindPort(uint port)
     my_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     ::bind(listen_fd_, (struct sockaddr *)&my_addr, sizeof(my_addr));
 
-    printf("bind on port=%d", port);
+    printf("bind on port=%d\n", port);
     return 0;
 }
 
@@ -49,7 +49,7 @@ int EpollServer::startListen()
 {
     if (0 == listen_fd_)
     {
-        printf("listen_fd error");
+        printf("listen_fd error\n");
         return -1;
     }
 
@@ -63,7 +63,7 @@ int EpollServer::startListen()
     int ret = epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, listen_fd_, &event);
     if (-1 == ret)
     {
-        printf("epoll add listen_fd error");
+        printf("epoll add listen_fd error\n");
         return -1;
     }
 
@@ -90,7 +90,7 @@ int EpollServer::startAccept()
                 (events[idx].events & EPOLLHUP) || 
                 !(events[idx].events & EPOLLIN))
             {
-                printf("epoll error");
+                printf("epoll error\n");
                 continue;
             }
 
@@ -129,7 +129,7 @@ int EpollServer::acceptConnection()
             }
             else
             {
-                printf("accept error");
+                printf("accept error\n");
                 break;
             }
         }
@@ -148,7 +148,7 @@ int EpollServer::acceptConnection()
         socket_event.events = EPOLLIN | EPOLLET;
         if (-1 == epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, socket_fd, &socket_event))
         {
-            printf("epoll ctl error");
+            printf("epoll ctl error\n");
             break;
         }
     }
@@ -168,7 +168,7 @@ int EpollServer::acceptData(int read_fd)
         {
             if (errno != EAGAIN)
             {
-                printf("read error");
+                printf("read error\n");
                 done = 1;
             }
             break;
@@ -184,7 +184,7 @@ int EpollServer::acceptData(int read_fd)
         // 标准输出
         if (-1 == write(1, buf, size))
         {
-            printf("write error");
+            printf("write error\n");
             break;
         }
 
