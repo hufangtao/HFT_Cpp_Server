@@ -111,7 +111,6 @@ int EpollServer::startAccept()
                 acceptData(events[idx].data.fd);
                 continue;
             }
-            
         }
     }
 
@@ -164,6 +163,7 @@ int EpollServer::acceptConnection()
 
 int EpollServer::acceptData(int read_fd)
 {
+    printf("strat accept data\n");
     int done = 0;
     while(true)
     {

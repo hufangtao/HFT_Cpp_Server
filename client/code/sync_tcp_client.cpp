@@ -51,3 +51,11 @@ int SyncTcpClient::syncRead()
 
 	return 0;
 }
+
+int SyncTcpClient::syncSend(string msg)
+{
+	size_t len = socket_.send(asio::buffer(msg));
+	printf("send size=%ld succ len=%zu\n", msg.length(), len);
+
+	return 0;
+}

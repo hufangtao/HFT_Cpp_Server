@@ -12,6 +12,7 @@ class SyncTcpClient
 	public:
 		void connect();
 		int syncRead();
+		int syncSend(string msg);
 
 	private:
 		tcp::resolver resolver_;
