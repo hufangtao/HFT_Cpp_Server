@@ -17,7 +17,7 @@ EpollServer::~EpollServer()
 
 int EpollServer::doCreateEpoll()
 {
-    int fd = epoll_create1(0);
+    int fd = epoll_create(0);
     if (fd == -1)
     {
         printf("create epoll fd error\n");
@@ -50,7 +50,7 @@ int EpollServer::makeSocketNonBlocking(int sfd)
 	return 0;
 }
 
-int EpollServer::bindPort(uint port)
+int EpollServer::bindPort(int port)
 {
     // 创建监听fd
     listen_fd_ = socket(AF_INET, SOCK_STREAM, 0);

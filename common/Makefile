@@ -1,5 +1,4 @@
 #	Common MakeFile
-
 CC	:=	gcc
 XX	:=	g++
 

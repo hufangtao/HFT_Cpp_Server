@@ -11,7 +11,7 @@ class EpollServer
         ~EpollServer();
 
     public:
-        int bindPort(uint port);
+        int bindPort(int port);
         int startListen();
         int startAccept();
 
