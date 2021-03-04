@@ -2,7 +2,6 @@
 *.o
 .idea/
 src/common/
-HFT_SERVER
+common/lib/libcommon.a
 gameserver/gameserver
 client/client
-common/hnet/tcp_server/lib

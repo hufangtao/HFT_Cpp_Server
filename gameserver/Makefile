@@ -1,4 +1,6 @@
 # GameServer MakeFile
+.PHONY: gameserver clean
+
 CC	:=	gcc
 XX	:=	g++
 
@@ -9,7 +11,6 @@ SRC_DIR		:= $(CUR_DIR)/code
 INC_DIR		:= $(CUR_DIR)/code
 LIB_DIR		:= ./
 OUT_DIR		:= $(CUR_DIR)/out
-
 LD_LIBS		+= boost_thread boost_system boost_coroutine boost_context boost_chrono boost_regex pthread
 
 include $(EXT_DIR)/boost/MakeFile.inc
@@ -25,7 +26,13 @@ OBJ := $(SOURCE_FILES:.cpp=.o)
 OBL_WITHOUT_DIR := $(notdir $(OBJ))
 OBJ_WITH_DIR := $(addprefix $(OUT_DIR)/, $(OBL_WITHOUT_DIR))
 
-gameserver: $(OBJ_WITH_DIR)
+# 给%.cpp用的搜索路径
+vpath %.cpp $(SRC_DIR)
+
+# 目标模块
+TARGET := gameserver
+
+$(TARGET): $(OBJ_WITH_DIR)
 	@echo "C_FLAGS:"$(C_FLAGS)
 	@echo "SOURCE_FILES:"$(SOURCE_FILES)
 	@echo "ALL_PROJECTS:"$(ALL_PROJECTS)
@@ -33,14 +40,12 @@ gameserver: $(OBJ_WITH_DIR)
 	$(XX) $^ $(LD_FLAGS) -o $@
 	export LD_LIBRARY_PATH=$(LIB_DIR_SH)
 
-$(OUT_DIR)/%.o: %.cpp
+$(OUT_DIR)/%.o:%.cpp
 	$(XX) $(C_FLAGS) -c $< -o $@
 
 lib:
 	export LD_LIBRARY_PATH=$(LIB_DIR_SH)
 
-.PHONY: gameserver clean
-
 clean:
-	-rm $(OBJ_WITH_DIR)
+	-rm $(TARGET) $(OBJ_WITH_DIR)
 
