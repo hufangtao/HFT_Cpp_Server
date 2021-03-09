@@ -5,3 +5,4 @@ src/common/
 common/lib/libcommon.a
 gameserver/gameserver
 client/client
+out/*
