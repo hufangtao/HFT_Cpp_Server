@@ -13,8 +13,10 @@ LIB_DIR		:= ./
 OUT_DIR		:= $(CUR_DIR)/out
 LD_LIBS		+= boost_thread boost_system boost_coroutine boost_context boost_chrono boost_regex pthread
 
-include $(EXT_DIR)/boost/MakeFile.inc
+# 注意引用顺序，通用的包放在最后
 include $(ROOT_DIR)/common/MakeFile.inc
+include $(EXT_DIR)/boost/MakeFile.inc
+include $(EXT_DIR)/curl/MakeFile.inc
 
 C_FLAGS		:= -g -Wall -Werror -O0 -std=c++17
 C_FLAGS		+= $(addprefix -I,$(INC_DIR))

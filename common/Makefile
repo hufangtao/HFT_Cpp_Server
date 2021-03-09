@@ -19,6 +19,7 @@ OUT_DIR		:= $(CUR_DIR)/out
 #	依赖模块
 #
 include $(EXT_DIR)/boost/MakeFile.inc
+include $(EXT_DIR)/curl/MakeFile.inc
 
 #
 #	所需编译的源文件

@@ -5,17 +5,19 @@ TARGET_SET	:= common gameserver client
 all: $(TARGET_SET)
 
 common:
-	echo -e "$@: $(MAKE)"
+	@echo -e "$@: $(MAKE)"
 	cd common; $(MAKE)
 
-gameserver:
-	echo -e "$@: $(MAKE)"
+gameserver: common
+	@echo -e "$@: $(MAKE)"
 	cd gameserver; $(MAKE)
 
-client:
-	echo -e "$@: $(MAKE)"
+client: common
+	@echo -e "$@: $(MAKE)"
 	cd client; $(MAKE)
 
 clean:
-	cd $(TARGET_SET); make clean
+	cd common; make clean
+	cd gameserver; make clean
+	cd client; make clean
 

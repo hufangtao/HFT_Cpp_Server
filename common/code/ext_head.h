@@ -6,6 +6,7 @@
 #include <boost/bind/bind.hpp>
 #include <memory>
 #include <stdio.h>
+#include <mutex>
 
 using namespace std;
 using namespace boost;

@@ -6,6 +6,7 @@
 #include <boost/bind/bind.hpp>
 #include <memory>
 #include <cstdio>
+#include <unistd.h>
 
 using namespace std;
 using namespace boost;
